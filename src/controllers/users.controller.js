@@ -27,9 +27,18 @@ export const addUser = async (req, res, next) => {
     }
 };
 
-export const editUser = async (req, res, next) => {
+export const editUserInfo = async (req, res, next) => {
     try {
-        const updated = await userService.updateUser(req.params.id, req.body);
+        const updated = await userService.updateUserInfo(req.params.id, req.body);
+        res.status(200).json(updated);
+    } catch (err) {
+        next(err);
+    }
+};
+
+export const editUserRole = async (req, res, next) => {
+    try {
+        const updated = await userService.updateUserRole(req.params.id, req.body.role);
         res.status(200).json(updated);
     } catch (err) {
         next(err);

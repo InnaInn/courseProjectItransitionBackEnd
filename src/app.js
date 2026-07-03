@@ -3,6 +3,8 @@ import cors from 'cors';
 import config from './config/config.js';
 import healthRoutes from './routes/health.routes.js'
 import userRoutes from './routes/users.routes.js'
+import attributesRoutes from  './routes/attributes.routes.js'
+import categoriesRoutes from './routes/categories.routes.js'
 
 const app = express();
 const PORT = config.server.port;
@@ -21,6 +23,8 @@ app.use((err, req, res, next) => {
 });
 app.use('/api/health', healthRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/attributes', attributesRoutes);
+app.use('/api/categories', categoriesRoutes);
 app.listen(PORT, () => {
     console.log(`Health check: ${BE_URL}/api/health`);
 });

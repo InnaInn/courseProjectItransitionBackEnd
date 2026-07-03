@@ -18,11 +18,19 @@ export const createUser = async (userData) => {
     return userData.id;
 };
 
-export const updateUser = async (id, userData) => {
+export const updateUserInfo = async (id, userData) => {
+    delete userData.role;
     const existing = await userRepo.findUserById(id);
     if (!existing) throw new Error('User not found');
 
-    await userRepo.updateUser(id, userData);
+    await userRepo.updateUserInfo(id, userData);
+};
+
+export const updateUserRole = async (id, role) => {
+    const existing = await userRepo.findUserById(id);
+    if (!existing) throw new Error('User not found');
+
+    await userRepo.updateUserRole(id, role);
 };
 
 export const deleteUser = async (id) => {
@@ -30,3 +38,4 @@ export const deleteUser = async (id) => {
     if (!existing) throw new Error('User not found');
     await userRepo.deleteUser(id);
 };
+

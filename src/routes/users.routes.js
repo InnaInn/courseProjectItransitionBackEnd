@@ -6,7 +6,8 @@ const router = Router();
 router.get('/', userController.listUsers);
 router.get('/:id', userController.getUserById);
 router.post('/', userController.addUser);
-router.put('/:id', userController.editUser);
+router.put('/:id', userController.editUserInfo);
+router.put('/:id/role', userController.editUserRole);
 router.delete('/:id', userController.removeUser);
 
 export default router;

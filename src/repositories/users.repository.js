@@ -57,10 +57,18 @@ export const createUser = async (userData) => {
         .insert(convertUserToSnakeCase(userData));
 };
 
-export const updateUser = async (id, userData) => {
+export const updateUserInfo = async (id, userData) => {
     return db('users')
         .where({ id })
         .update(convertUserToSnakeCase(userData));
+};
+
+export const updateUserRole = async (id, role) => {
+    return db('users')
+        .where({ id })
+        .update({
+            role_id: role
+        });
 };
 
 export const deleteUser = async (id) => {
