@@ -1,4 +1,5 @@
 import * as userRepo from '../repositories/users.repository.js';
+import * as attributesRepo from '../repositories/attributes.repository.js';
 import { v7 as uuidv7 } from 'uuid';
 
 export const getAllUsers = async () => {

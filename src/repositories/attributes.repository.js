@@ -7,7 +7,6 @@ function convertAttributeToSnakeCase(attributeData) {
         type: attributeData.type,
         values: attributeData.values,
         name: attributeData.name
-        
     }
 }
 
@@ -18,8 +17,7 @@ function convertAttributeToCamelCase(row) {
         categoryValue: row.category_value,
         type: row.type,
         values: row.values,
-        name: row.name,
-        
+        name: row.name,  
     }
 }
 
@@ -36,6 +34,8 @@ export const findAllAttributes = async () => {
 
     return rows.map(convertAttributeToCamelCase);
 };
+
+
 
 export const findAttributeById = async (id) => {
     const row = await db('attributes')
