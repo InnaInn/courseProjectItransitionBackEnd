@@ -5,6 +5,13 @@ export const getAllPositions = async () => {
     return positionRepo.findAllPositions();
 };
 
+export const getPosition = async (id) => {
+    const position = await positionRepo.findPositionById(id);
+    if (!position) throw new Error('Position not found');
+    return position;
+};
+
+
 export const createPosition = async (positionData) => {
     positionData.id = uuidv7();
     await positionRepo.createPosition(positionData);

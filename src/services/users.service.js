@@ -12,6 +12,10 @@ export const getUser = async (id) => {
     return user;
 };
 
+export const getUserByEmail = async (email, password) => {
+    return userRepo.findUserByEmail(email, password);
+};
+
 export const createUser = async (userData) => {
     userData.id = uuidv7();
     userData.roleId = 'CANDIDATE';

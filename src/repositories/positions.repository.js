@@ -38,7 +38,6 @@ export const findPositionById = async (id) => {
     return convertPositionToCamelCase(row);
 };
 
-
 export const createPosition = async (positionData) => {
     return db('position')
         .insert(convertPositionToSnakeCase(positionData));

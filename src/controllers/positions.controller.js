@@ -9,6 +9,16 @@ export const listPositions = async (req, res, next) => {
     }
 };
 
+
+export const getPositionById = async (req, res, next) => {
+    try {
+        const position = await positionService.getPosition(req.params.id);
+        res.status(200).json(position);
+    } catch (err) {
+        next(err);
+    }
+};
+
 export const addPosition = async (req, res, next) => {
     try {
         const newPositionId = await positionService.createPosition(req.body);

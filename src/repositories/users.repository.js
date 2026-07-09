@@ -16,17 +16,19 @@ function convertUserToSnakeCase(userData) {
 }
 
 function convertUserToCamelCase(row) {
-    return {
-        id: row.id,
-        roleId: row.role_id,
-        firstName: row.first_name,
-        lastName: row.last_name,
-        email: row.email,
-        phone: row.phone,
-        address: row.address,
-        photoUrl: row.photo_url,
-        position: row.position,
-        summary: row.summary
+    if (row) {
+        return {
+            id: row.id,
+            roleId: row.role_id,
+            firstName: row.first_name,
+            lastName: row.last_name,
+            email: row.email,
+            phone: row.phone,
+            address: row.address,
+            photoUrl: row.photo_url,
+            position: row.position,
+            summary: row.summary
+        }
     }
 }
 
@@ -47,6 +49,17 @@ export const findUserById = async (id) => {
     const row = await db('users')
         .select('users.*')
         .where('users.id', id)
+        .first();
+
+    return convertUserToCamelCase(row);
+};
+
+export const findUserByEmail = async (email, password) => {
+    const row = await db('users')
+        .where({
+            email: email,
+            password: password
+        })
         .first();
 
     return convertUserToCamelCase(row);

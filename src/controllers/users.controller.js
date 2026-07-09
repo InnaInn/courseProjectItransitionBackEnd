@@ -11,7 +11,7 @@ export const listUsers = async (req, res, next) => {
 
 export const getUserById = async (req, res, next) => {
     try {
-        const user = await userService.getUser(req.params.id);
+        const user = await userService.getUser(req.params.userId);
         res.status(200).json(user);
     } catch (err) {
         next(err);
@@ -29,7 +29,7 @@ export const addUser = async (req, res, next) => {
 
 export const editUserInfo = async (req, res, next) => {
     try {
-        const updated = await userService.updateUserInfo(req.params.id, req.body);
+        const updated = await userService.updateUserInfo(req.params.userId, req.body);
         res.status(200).json(updated);
     } catch (err) {
         next(err);
@@ -38,7 +38,7 @@ export const editUserInfo = async (req, res, next) => {
 
 export const editUserRole = async (req, res, next) => {
     try {
-        const updated = await userService.updateUserRole(req.params.id, req.body.role);
+        const updated = await userService.updateUserRole(req.params.userId, req.body.role);
         res.status(200).json(updated);
     } catch (err) {
         next(err);
@@ -47,7 +47,7 @@ export const editUserRole = async (req, res, next) => {
 
 export const removeUser = async (req, res, next) => {
     try {
-        await userService.deleteUser(req.params.id);
+        await userService.deleteUser(req.params.userId);
         res.status(204).send();
     } catch (err) {
         next(err);

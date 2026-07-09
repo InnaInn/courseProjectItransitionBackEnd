@@ -1,8 +1,8 @@
 import * as userAttributeRepo from '../repositories/userAttributes.repository.js';
 import { v7 as uuidv7 } from 'uuid';
     
-export const getUserAttributes = async (usesrId) => {
-    const userAttributes = await userAttributeRepo.findUserAttributesByUserId(usesrId);
+export const getUserAttributes = async (usersId) => {
+    const userAttributes = await userAttributeRepo.findUserAttributesByUserId(usersId);
     return userAttributes;
 };
 

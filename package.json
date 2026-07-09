@@ -18,7 +18,8 @@
     "express": "^5.2.1",
     "knex": "^3.3.0",
     "pg": "^8.22.0",
-    "uuid": "^14.0.1"
+    "uuid": "^14.0.1",
+    "xsess": "^0.0.6"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"
