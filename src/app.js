@@ -7,7 +7,6 @@ import userRoutes from './routes/users.routes.js'
 import attributesRoutes from  './routes/attributes.routes.js'
 import categoriesRoutes from './routes/categories.routes.js'
 import positionRoutes from './routes/positions.routes.js'
-import projectsRoutes from './routes/projects.routes.js'
 import authRoutes from './routes/auth.routes.js'
 
 const app = express();
@@ -39,7 +38,6 @@ app.use('/api/users', userRoutes);
 app.use('/api/attributes', attributesRoutes);
 app.use('/api/categories', categoriesRoutes);
 app.use('/api/position', positionRoutes);
-app.use('/api/projects', projectsRoutes);
 app.use('/api/auth', authRoutes);
 app.listen(PORT, () => {
     console.log(`Health check: ${BE_URL}/api/health`);

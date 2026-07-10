@@ -2,7 +2,7 @@ import * as projectService from '../services/projects.service.js';
 
 export const listProjectsForUser = async (req, res, next) => {
     try {
-        const projects = await projectService.getProjectsByUserId(req.query.userId);
+        const projects = await projectService.getProjectsByUserId(req.params.userId);
         res.status(200).json(projects);
     } catch (err) {
         next(err);
@@ -11,6 +11,7 @@ export const listProjectsForUser = async (req, res, next) => {
 
 export const addProject = async (req, res, next) => {
     try {
+        req.body.userId = req.params.userId;
         const newProjectId = await projectService.createProject(req.body);
         res.status(201).json({ id: newProjectId });
     } catch (err) {
@@ -20,7 +21,7 @@ export const addProject = async (req, res, next) => {
 
 export const editProjectInfo = async (req, res, next) => {
     try {
-        const updated = await projectService.updateProjectInfo(req.params.id, req.body);
+        const updated = await projectService.updateProjectInfo(req.params.userId, req.body);
         res.status(200).json(updated);
     } catch (err) {
         next(err);
@@ -29,7 +30,7 @@ export const editProjectInfo = async (req, res, next) => {
 
 export const removeProject = async (req, res, next) => {
     try {
-        await projectService.deleteProject(req.params.id);
+        await projectService.deleteProject(req.params.userId);
         res.status(204).send();
     } catch (err) {
         next(err);
