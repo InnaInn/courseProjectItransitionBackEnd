@@ -1,9 +1,15 @@
 import { Router } from 'express';
 import * as positionController from '../controllers/positions.controller.js';
 import * as positionAttributesController from '../controllers/positionsAttributes.controller.js'
+import * as userPositionsController from '../controllers/userPositions.controller.js'
 import { isAuthenticated, isAuthorized, hasRole } from '../middlewares/auth.middleware.js'
 
 const router = Router();
+
+router.get('/:positionId/users',
+    isAuthenticated,
+    isAuthorized(hasRole('ADMIN', 'RECRUITER')),
+    userPositionsController.listUsersByPositionId);
 
 router.get('/:positionId/attributes',
     isAuthenticated,

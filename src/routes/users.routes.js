@@ -1,16 +1,31 @@
 import { Router } from 'express';
 import * as userController from '../controllers/users.controller.js';
 import * as userAttributesController from '../controllers/usersAttributes.controller.js'
+import * as userPositionsController from '../controllers/userPositions.controller.js'
 import * as projectController from '../controllers/projects.controller.js';
 import { isAuthenticated, isAuthorized, hasRole, isUserOwnResource } from '../middlewares/auth.middleware.js'
 
 const router = Router();
 
+router.get('/:userId/positions',
+    isAuthenticated,
+    isAuthorized(hasRole('ADMIN', 'RECRUITER'), isUserOwnResource),
+    userPositionsController.listPositionsByUserId);
+router.post('/:userId/positions',
+    isAuthenticated,
+    isAuthorized(hasRole('ADMIN'), isUserOwnResource),
+    userPositionsController.addUserPosition);
+router.delete('/:userId/positions/:positionId',
+    isAuthenticated,
+    isAuthorized(hasRole('ADMIN', 'RECRUITER'), isUserOwnResource),
+    userPositionsController.removeUserPosition );
+
+
 router.get('/:userId/attributes',
     isAuthenticated,
     isAuthorized(hasRole('ADMIN', 'RECRUITER'), isUserOwnResource),
     userAttributesController.listAttributesByUserId);
-router.post('/:uerId/attributes',
+router.post('/:userId/attributes',
     isAuthenticated,
     isAuthorized(hasRole('ADMIN'), isUserOwnResource),
     userAttributesController.addUserAttribute);

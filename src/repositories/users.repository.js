@@ -11,7 +11,8 @@ function convertUserToSnakeCase(userData) {
         address: userData.address,
         photo_url: userData.photoUrl,
         position: userData.position,
-        summary: userData.summary
+        summary: userData.summary,
+        password: userData.password
     }
 }
 
@@ -27,7 +28,8 @@ function convertUserToCamelCase(row) {
             address: row.address,
             photoUrl: row.photo_url,
             position: row.position,
-            summary: row.summary
+            summary: row.summary,
+            password: row.password
         }
     }
 }

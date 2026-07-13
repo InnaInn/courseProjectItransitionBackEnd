@@ -8,18 +8,19 @@ function convertProjectToSnakeCase(projectData) {
         description: projectData.description,
         start_date: projectData.startDate,
         end_date: projectData.endDate
-        
     }
 }
 
 function convertProjectToCamelCase(row) {
-    return {
-        id: row.id,
-        userId: row.user_id,
-        name: row.name,
-        description: row.description,
-        startDate: row.start_date, 
-        endDate: row.end_date   
+    if (row) {
+        return {
+            id: row.id,
+            userId: row.user_id,
+            name: row.name,
+            description: row.description,
+            startDate: row.start_date,
+            endDate: row.end_date
+        }
     }
 }
 
@@ -33,7 +34,8 @@ export const findProjectsByUserId = async (userId) => {
             'projects.start_date',
             'projects.end_date'
         )
-        .where('projects.user_id', userId);
+        .where('projects.user_id', userId)
+        .orderBy('projects.start_date')
 
     return rows.map(convertProjectToCamelCase);
 };
@@ -55,7 +57,12 @@ export const createProject = async (projectData) => {
 export const updateProjectInfo = async (id, projectData) => {
     return db('projects')
         .where({ id })
-        .update(convertProjectToSnakeCase(projectData));
+        .update({
+            name: projectData.name,
+            description: projectData.description,
+            start_date: projectData.startDate,
+            end_date: projectData.endDate
+        });
 };
 
 export const deleteProject = async (id) => {

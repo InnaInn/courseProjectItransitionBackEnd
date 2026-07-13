@@ -21,7 +21,8 @@ export const addProject = async (req, res, next) => {
 
 export const editProjectInfo = async (req, res, next) => {
     try {
-        const updated = await projectService.updateProjectInfo(req.params.userId, req.body);
+        req.body.userId = req.params.userId;
+        const updated = await projectService.updateProjectInfo(req.params.projectId, req.body);
         res.status(200).json(updated);
     } catch (err) {
         next(err);
@@ -30,7 +31,7 @@ export const editProjectInfo = async (req, res, next) => {
 
 export const removeProject = async (req, res, next) => {
     try {
-        await projectService.deleteProject(req.params.userId);
+        await projectService.deleteProject(req.params.projectId);
         res.status(204).send();
     } catch (err) {
         next(err);
