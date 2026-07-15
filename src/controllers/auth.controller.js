@@ -47,20 +47,3 @@ export const logout = async (req, res, next) => {
         res.status(204).send();
     });
 }
-
-export const me = async (req, res, next) => {
-    try {
-        const user = await userService.getUser(userId);
-
-        if (!user) {
-            return res.status(404).json({ error: 'User not found' });
-        }
-
-      
-        const { password, ...userWithoutPassword } = user;
-
-        res.status(200).json(userWithoutPassword);
-    } catch (err) {
-        next(err);
-    }
-};

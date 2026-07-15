@@ -49,7 +49,7 @@ export const createPositionUser = async (positionUserData) => {
         .insert(convertPositionUserToSnakeCase(positionUserData));
 };
 
-export const deletePositionUser = async (positionId, userId) => {
+export const deletePositionUser = async (userId, positionId) => {
     return db('position_users')
         .where({
             'user_id': userId,

@@ -29,7 +29,7 @@ export const addUserPosition = async (req, res, next) => {
 
 export const removeUserPosition = async (req, res, next) => {
     try {
-        await userPositionsService.deletePositionUser(req.params.userId, req.params.positionId);
+        await userPositionsService.deleteUserPosition(req.params.userId, req.params.positionId);
         res.status(204).send();
     } catch (err) {
         next(err);
