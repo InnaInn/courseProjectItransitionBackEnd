@@ -34,8 +34,8 @@ function convertUserToCamelCase(row) {
     }
 }
 
-export const findAllUsers = async () => {
-    const rows = await db('users')
+export const findAllUsers = async (userPrefix) => {
+    let query = db('users')
         .select(
             'users.id',
             'users.role_id',
@@ -43,7 +43,10 @@ export const findAllUsers = async () => {
             'users.last_name',
             'users.email'
         );
-
+    if (userPrefix !== undefined) {
+        query = query.where('users.last_name', 'ilike', `${userPrefix}%`);
+    }
+    const rows = await query;
     return rows.map(convertUserToCamelCase);
 };
 

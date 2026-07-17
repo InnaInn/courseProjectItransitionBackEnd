@@ -2,7 +2,8 @@ import * as attributeService from '../services/attributes.service.js';
 
 export const listAttributes = async (req, res, next) => {
     try {
-        const attributes = await attributeService.getAllAttributes();
+        const attributePrefix = req.query.attributePrefix;
+        const attributes = await attributeService.getAllAttributes(attributePrefix);
         res.status(200).json(attributes);
     } catch (err) {
         next(err);

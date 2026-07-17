@@ -1,8 +1,8 @@
 import * as attributeRepo from '../repositories/attributes.repository.js';
 import { v7 as uuidv7 } from 'uuid';
 
-export const getAllAttributes = async () => {
-    return attributeRepo.findAllAttributes();
+export const getAllAttributes = async (attributePrefix) => {
+    return attributeRepo.findAllAttributes(attributePrefix);
 };
 
 

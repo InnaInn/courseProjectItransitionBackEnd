@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@casual-simulation/crypto": "^4.0.5",
     "cors": "^2.8.6",
     "dotenv": "^16.6.1",
     "express": "^5.2.1",

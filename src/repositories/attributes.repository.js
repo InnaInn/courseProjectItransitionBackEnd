@@ -21,8 +21,8 @@ function convertAttributeToCamelCase(row) {
     }
 }
 
-export const findAllAttributes = async () => {
-    const rows = await db('attributes')
+export const findAllAttributes = async (attributePrefix) => {
+    let query = db('attributes')
         .leftJoin('categories', 'attributes.category_id', '=', 'categories.id')
         .select(
             'attributes.id',
@@ -31,11 +31,12 @@ export const findAllAttributes = async () => {
             'attributes.values',
             'attributes.name'
         );
-
+    if (attributePrefix !== undefined) {
+        query = query.where('attributes.name', 'ilike', `${attributePrefix}%`);
+    }
+    const rows = await query;
     return rows.map(convertAttributeToCamelCase);
 };
-
-
 
 export const findAttributeById = async (id) => {
     const row = await db('attributes')

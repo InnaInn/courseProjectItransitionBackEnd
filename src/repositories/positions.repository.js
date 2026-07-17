@@ -18,14 +18,19 @@ function convertPositionToCamelCase(row) {
     }
 }
 
-export const findAllPositions = async () => {
-    const rows = await db('position')
+export const findAllPositions = async (positionPrefix) => {
+    let query = db('position')
         .select(
             'position.id',
             'position.name',
             'position.description',
         );
-
+    
+    if (positionPrefix !== undefined && positionPrefix.trim() !== '') {
+        query = query.where('position.name', 'ilike', `${positionPrefix.trim()}%`);
+    }
+    
+    const rows = await query;
     return rows.map(convertPositionToCamelCase);
 };
 

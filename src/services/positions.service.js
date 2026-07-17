@@ -1,8 +1,9 @@
 import * as positionRepo from '../repositories/positions.repository.js';
+import * as positionAttributesRepo from '../repositories/positionAttributes.repository.js'
 import { v7 as uuidv7 } from 'uuid';
 
-export const getAllPositions = async () => {
-    return positionRepo.findAllPositions();
+export const getAllPositions = async (positionPrefix) => {
+    return positionRepo.findAllPositions(positionPrefix);
 };
 
 export const getPosition = async (id) => {
@@ -11,6 +12,19 @@ export const getPosition = async (id) => {
     return position;
 };
 
+export const duplicatePosition = async(id) => {
+    const currentPosition =  await getPosition(id);
+    currentPosition.name = currentPosition.name + ' (copy)'
+    const newPostitionId = await createPosition(currentPosition);
+    const attributes = await positionAttributesRepo.findPositionAttributesByPositionId(id);
+    for (let attribute of attributes) {
+        positionAttributesRepo.createPositionAttribute({
+            positionId: newPostitionId,
+            attributeId: attribute.id 
+        });
+    }
+    return newPostitionId;
+}
 
 export const createPosition = async (positionData) => {
     positionData.id = uuidv7();

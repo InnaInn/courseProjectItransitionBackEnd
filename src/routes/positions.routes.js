@@ -12,8 +12,6 @@ router.get('/:positionId/users',
     userPositionsController.listUsersByPositionId);
 
 router.get('/:positionId/attributes',
-    isAuthenticated,
-    isAuthorized(hasRole('ADMIN', 'RECRUITER', 'CANDIDATE')),
     positionAttributesController.listAttributesByPositionId);
 router.post('/:positionId/attributes',
     isAuthenticated,
@@ -24,18 +22,16 @@ router.delete('/:positionId/attributes/:attributeId',
     isAuthorized(hasRole('ADMIN', 'RECRUITER')),
     positionAttributesController.removePositionAttribute);
 
-router.get('/',
-    isAuthenticated,
-    isAuthorized(hasRole('ADMIN', 'RECRUITER', 'CANDIDATE')),
-    positionController.listPositions);
-router.get('/:id',
-    isAuthenticated,
-    isAuthorized(hasRole('ADMIN', 'RECRUITER', 'CANDIDATE')),
-    positionController.getPositionById);
+router.get('/', positionController.listPositions);                                    
+router.get('/:id', positionController.getPositionById);                        
 router.post('/',
     isAuthenticated,
     isAuthorized(hasRole('ADMIN', 'RECRUITER')),
     positionController.addPosition);
+router.post('/:id/duplicate',
+    isAuthenticated,
+    isAuthorized(hasRole('ADMIN', 'RECRUITER')),
+    positionController.duplicatePosition);
 router.put('/:id',
     isAuthenticated,
     isAuthorized(hasRole('ADMIN', 'RECRUITER')),
@@ -44,6 +40,5 @@ router.delete('/:id',
     isAuthenticated,
     isAuthorized(hasRole('ADMIN', 'RECRUITER')),
     positionController.removePosition);
-
 
 export default router;
