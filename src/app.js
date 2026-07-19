@@ -29,16 +29,16 @@ app.use(cors({
 }));
 app.set("trust proxy", 1);
 app.use(express.json());
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send({ status: 'Something went wrong', stackTrace: err.stack });
-});
 app.use('/api/health', healthRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/attributes', attributesRoutes);
 app.use('/api/categories', categoriesRoutes);
 app.use('/api/position', positionRoutes);
 app.use('/api/auth', authRoutes);
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send({ status: 'Something went wrong'});
+});
 app.listen(PORT, () => {
     console.log(`Health check: ${BE_URL}/api/health`);
 });

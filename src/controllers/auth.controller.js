@@ -14,11 +14,10 @@ export const login = async (req, res, next) => {
     const { email, password } = req.body;
 
     const user = await userService.getUserByEmail(email, password);
-    const userId = user.id;
-
     if (!user) {
         return res.status(401).json({ error: 'Invalid credentials' });
     }
+    const userId = user.id;
     if (sessionMapping.get(userId)) {
         await req.session.regenerate();
     }

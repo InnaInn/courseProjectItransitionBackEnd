@@ -23,7 +23,11 @@ export const addUser = async (req, res, next) => {
         const newUserId = await userService.createUser(req.body);
         res.status(201).json({ id: newUserId });
     } catch (err) {
-        next(err);
+        if (err.constraint === 'users_email_idx') {
+            res.status(409).json({error: 'User already exists'});
+        } else {
+            next(err);
+        }
     }
 };
 
