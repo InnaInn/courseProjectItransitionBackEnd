@@ -8,6 +8,7 @@ import attributesRoutes from  './routes/attributes.routes.js'
 import categoriesRoutes from './routes/categories.routes.js'
 import positionRoutes from './routes/positions.routes.js'
 import authRoutes from './routes/auth.routes.js'
+import salesforceRoutes from './routes/salesforce.routes.js';
 
 const app = express();
 const PORT = config.server.port;
@@ -35,6 +36,7 @@ app.use('/api/attributes', attributesRoutes);
 app.use('/api/categories', categoriesRoutes);
 app.use('/api/position', positionRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/salesforce', salesforceRoutes);
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send({ status: 'Something went wrong'});

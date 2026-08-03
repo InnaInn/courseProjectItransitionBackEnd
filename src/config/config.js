@@ -18,6 +18,15 @@ const config = {
     port: process.env.DB_PORT,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD
+  },
+  
+  salesforce: {
+    //clientId: process.env.SALESFORCE_CLIENT_ID,
+    //clientSecret: process.env.SALESFORCE_CLIENT_SECRET,
+    username: process.env.SALESFORCE_USERNAME,
+    password: process.env.SALESFORCE_PASSWORD,
+    securityToken: process.env.SALESFORCE_SECURITY_TOKEN,
+    //redirectUri: process.env.SALESFORCE_REDIRECT_URI || 'http://localhost:5000/api/salesforce/callback',
   }
 };
 

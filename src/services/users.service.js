@@ -17,7 +17,7 @@ export const getAllUsers = async (userPrefix) => {
 export const getUser = async (id) => {
     const user = await userRepo.findUserById(id);
     if (!user) throw new Error('User not found');
-    return user;
+    return user; 
 };
 
 export const getUserByEmail = async (email, password) => {
